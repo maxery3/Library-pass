@@ -8,8 +8,9 @@
   <!-- 8비트 아케이드 픽셀 폰트 로드 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/neodunggeunmo/neodunggeunmo@v1.5.0/neodunggeunmo.css">
   
-  <!-- Firebase 실시간 데이터베이스 라이브러리 -->
+  <!-- Firebase 라이브러리 (Auth, Database) -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
   <style>
@@ -119,7 +120,7 @@
       font-size: 12px;
       letter-spacing: 4px;
       color: #888;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
       text-align: center;
     }
 
@@ -137,10 +138,22 @@
       box-shadow: 2px 2px 0px #888, 4px 4px 0px #000;
     }
 
+    .user-info-bar {
+      font-size: 11px;
+      color: #aaa;
+      margin-bottom: 15px;
+      border-bottom: 1px dashed #444;
+      padding-bottom: 6px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     .form-title {
       font-size: 22px;
       letter-spacing: 4px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       text-align: center;
     }
     .form-group {
@@ -223,16 +236,7 @@
       font-size: 14px;
       letter-spacing: 2px;
       color: #888;
-      margin-bottom: 36px;
-    }
-    .link-home {
-      background: none;
-      border: none;
-      color: #888;
-      font-size: 13px;
-      text-decoration: underline;
-      margin-top: 16px;
-      cursor: pointer;
+      margin-bottom: 30px;
     }
 
     .print-slot-area {
@@ -303,15 +307,6 @@
       margin-top: 6px;
     }
 
-    .teacher-toggle-btn {
-      background: none;
-      border: none;
-      color: #888;
-      font-size: 13px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
     .teacher-header {
       display: flex;
       justify-content: space-between;
@@ -342,13 +337,13 @@
       color: #fff;
     }
     .admin-card-title {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: bold;
       color: #fff;
       margin-bottom: 6px;
     }
     .admin-card-info {
-      font-size: 15px;
+      font-size: 13px;
       color: #fff;
       margin: 4px 0;
       line-height: 1.4;
@@ -417,15 +412,19 @@
 
       <div class="screen-border">
 
-        <!-- [화면 1] 메인 화면 -->
+        <!-- [화면 1] 로그인 시작 화면 -->
         <div class="screen active" id="screenStart">
           <div class="main-title arcade-text">도서관 패스</div>
           <div class="main-sub">LIBRARY PASS</div>
-          <button class="pixel-btn" onclick="goToScreen('screenForm')">받기</button>
+          <button class="pixel-btn" onclick="loginWithGoogle()">구글 로그인</button>
         </div>
 
-        <!-- [화면 2] 패스 신청 폼 화면 -->
+        <!-- [화면 2] 학생 패스 신청 화면 -->
         <div class="screen" id="screenForm">
+          <div class="user-info-bar">
+            <span id="userEmailTag">계정: -</span>
+            <span style="cursor:pointer; text-decoration:underline;" onclick="logout()">로그아웃</span>
+          </div>
           <div class="form-title">패스 신청</div>
 
           <div class="form-group">
@@ -467,28 +466,32 @@
           <button class="btn-submit-wide" onclick="submitPassForm()">작성하기</button>
         </div>
 
-        <!-- [화면 3] 승인 상태 화면 -->
+        <!-- [화면 3] 학생 승인 상태 화면 -->
         <div class="screen" id="screenStatus">
           <div class="status-sub">STATUS</div>
           <div class="status-main-text arcade-text" id="statusText">승인확인 중.</div>
           <div class="code-text" id="codeText">LP-0000</div>
 
-          <button class="pixel-btn" onclick="handleReceiptPrint()">영수증 출력</button>
-          <button class="link-home" onclick="goToScreen('screenStart')">처음으로</button>
+          <button class="pixel-btn" onclick="handleReceiptPrint()" style="margin-bottom:12px;">영수증 출력</button>
+          <button class="pixel-btn" onclick="logout()" style="font-size:13px; padding:6px 16px;">로그아웃</button>
         </div>
 
-        <!-- [선생님 전용 화면] -->
+        <!-- [화면 4] 선생님 승인 관리 화면 -->
         <div class="screen" id="screenTeacher">
+          <div class="user-info-bar">
+            <span>[선생님 모드]</span>
+            <span style="cursor:pointer; text-decoration:underline;" onclick="logout()">로그아웃</span>
+          </div>
           <div class="teacher-header">
-            <div style="font-size:16px; letter-spacing:2px;" class="arcade-text">[선생님 승인 관리]</div>
+            <div style="font-size:15px;" class="arcade-text">신청 목록</div>
             <button class="btn-clear-all" onclick="clearAllData()">전체지우기</button>
           </div>
-          <div id="teacherList" style="width:100%; max-height:300px; overflow-y:auto;"></div>
+          <div id="teacherList" style="width:100%; max-height:280px; overflow-y:auto;"></div>
         </div>
 
       </div>
 
-      <!-- 하단 PRINT 슬롯 -->
+      <!-- 하단 PRINT 슬롯 (영수증 출력 애니메이션) -->
       <div class="print-slot-area">
         <div class="print-slot-bar"></div>
         
@@ -520,8 +523,6 @@
     </div>
   </div>
 
-  <button class="teacher-toggle-btn" id="teacherToggleLink" onclick="toggleTeacherMode()">▶ 선생님 화면</button>
-
   <!-- 영수증 상세 모달 -->
   <div class="modal-overlay" id="receiptModal">
     <div class="receipt-paper">
@@ -538,7 +539,7 @@
   </div>
 
   <script>
-    // Firebase 연동 설정
+    // Firebase 연결 설정 (복사된 설정값 반영됨)
     const firebaseConfig = {
       apiKey: "AIzaSyD-2lCTS1sve-aCZYa8766fm1AeB1VX6-Y",
       authDomain: "library-pass-14d45.firebaseapp.com",
@@ -552,29 +553,71 @@
     
     firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
+    const auth = firebase.auth();
 
+    let currentUser = null;
     let currentAppId = null;
-    let isTeacherView = false;
-    let statusTimer = null;
     let passesData = {};
+    let statusTimer = null;
 
     window.onload = () => {
       initDropdowns();
       
-      // Firebase 실시간 데이터 동기화
+      // 구글 로그인 상태 감지 및 'mg' 이메일 조건 분기
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          currentUser = user;
+          const email = user.email.toLowerCase();
+          document.getElementById('userEmailTag').innerText = `계정: ${user.email}`;
+
+          // 'mg'로 시작하면 학생 화면, 그 외에는 선생님 화면
+          if (email.startsWith('mg')) {
+            goToScreen('screenForm');
+          } else {
+            goToScreen('screenTeacher');
+            requestNotificationPermission(); // 선생님 브라우저 알림 권한 요청
+          }
+        } else {
+          currentUser = null;
+          goToScreen('screenStart');
+        }
+      });
+
+      // Firebase 실시간 DB 감지
       database.ref('passes').on('value', (snapshot) => {
+        const oldPasses = passesData;
         passesData = snapshot.val() || {};
-        if (isTeacherView) renderTeacherList();
+
+        // 선생님 모드일 때 새 신청 알림 발송
+        if (currentUser && !currentUser.email.toLowerCase().startsWith('mg')) {
+          const newKeys = Object.keys(passesData).filter(k => !oldPasses[k]);
+          if (newKeys.length > 0 && Object.keys(oldPasses).length > 0) {
+            const latest = passesData[newKeys[0]];
+            const passesStr = Array.isArray(latest.passes) ? latest.passes.join(', ') : latest.passes;
+            sendBrowserNotification(`새 패스 신청: ${latest.name}`, `${latest.date} - ${passesStr}`);
+          }
+          renderTeacherList();
+        }
+
         if (currentAppId) updateStatusDisplay();
       });
     };
+
+    function loginWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider).catch(err => alert("로그인 실패: " + err.message));
+    }
+
+    function logout() {
+      auth.signOut();
+      resetForm();
+    }
 
     function initDropdowns() {
       const mSel = document.getElementById('selectMonth');
       const dSel = document.getElementById('selectDay');
       mSel.innerHTML = '<option value="">월</option>';
       dSel.innerHTML = '<option value="">일</option>';
-
       for (let m = 1; m <= 12; m++) mSel.innerHTML += `<option value="${m}">${m}월</option>`;
       for (let d = 1; d <= 31; d++) dSel.innerHTML += `<option value="${d}">${d}일</option>`;
     }
@@ -604,19 +647,14 @@
     }
 
     function goToScreen(screenId) {
-      if (screenId === 'screenStart') {
-        resetForm();
-      }
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById(screenId).classList.add('active');
     }
 
-    // 신청 데이터 Firebase에 등록
     function submitPassForm() {
       const name = document.getElementById('inputName').value.trim();
       const month = document.getElementById('selectMonth').value;
       const day = document.getElementById('selectDay').value;
-
       const times = Array.from(document.querySelectorAll('#timeGroup .selected')).map(el => el.dataset.val);
       const passes = Array.from(document.querySelectorAll('#passGroup .selected')).map(el => el.dataset.val);
       const reason = document.getElementById('inputReason').value.trim();
@@ -626,10 +664,10 @@
       if (times.length === 0) { alert('시간을 선택하세요.'); return; }
       if (passes.length === 0) { alert('패스를 선택하세요.'); return; }
 
-      const codeNum = Math.floor(1000 + Math.random() * 9000);
       const newApp = {
         id: 'APP_' + Date.now(),
-        code: `LP-${codeNum}`,
+        code: `LP-${Math.floor(1000 + Math.random() * 9000)}`,
+        email: currentUser ? currentUser.email : '비회원',
         name,
         date: `${month}월 ${day}일`,
         times,
@@ -646,7 +684,6 @@
       updateStatusDisplay();
     }
 
-    // 상태 확인 애니메이션 처리
     function updateStatusDisplay() {
       if (!currentAppId || !passesData[currentAppId]) return;
       const app = passesData[currentAppId];
@@ -666,11 +703,8 @@
           clearInterval(statusTimer);
           statusTimer = null;
         }
-        if (app.status === 'approved') {
-          statusText.innerText = '승인 완료';
-        } else if (app.status === 'rejected') {
-          statusText.innerText = '승인 거절됨';
-        }
+        if (app.status === 'approved') statusText.innerText = '승인 완료!';
+        else if (app.status === 'rejected') statusText.innerText = '승인 거절됨';
       }
     }
 
@@ -679,7 +713,7 @@
       const app = passesData[currentAppId];
 
       if (app.status !== 'approved') {
-        alert('아직 승인되지 않았습니다.');
+        alert('아직 선생님 승인이 완료되지 않았습니다.');
         return;
       }
 
@@ -687,8 +721,7 @@
       document.getElementById('pMiniDate').innerText = `날짜: ${app.date}`;
       document.getElementById('pMiniPass').innerText = `패스: ${Array.isArray(app.passes) ? app.passes.join(', ') : app.passes}`;
 
-      const wrapper = document.getElementById('dispenserWrapper');
-      wrapper.classList.add('slide-down');
+      document.getElementById('dispenserWrapper').classList.add('slide-down');
     }
 
     function openReceiptModal() {
@@ -707,39 +740,13 @@
       document.getElementById('receiptModal').classList.remove('active');
     }
 
-    function toggleTeacherMode() {
-      if (!isTeacherView) {
-        const pw = prompt('선생님 비밀번호를 입력하세요:');
-        if (pw === 'inhaklove') {
-          isTeacherView = true;
-          document.getElementById('teacherToggleLink').innerText = '◀ 학생 화면으로';
-          goToScreen('screenTeacher');
-          renderTeacherList();
-        } else if (pw !== null) {
-          alert('비밀번호가 올바르지 않습니다.');
-        }
-      } else {
-        isTeacherView = false;
-        document.getElementById('teacherToggleLink').innerText = '▶ 선생님 화면';
-        goToScreen('screenStart');
-      }
-    }
-
-    // 선생님 데이터 전체 지우기 (Firebase 연동)
-    function clearAllData() {
-      if (confirm('정말로 모든 신청 데이터를 삭제하시겠습니까?')) {
-        database.ref('passes').remove();
-      }
-    }
-
-    // 선생님 내역 렌더링 (코드 지움, 흰색 글씨 적용)
     function renderTeacherList() {
       const list = Object.values(passesData);
       const container = document.getElementById('teacherList');
       container.innerHTML = '';
 
       if (list.length === 0) {
-        container.innerHTML = '<div style="font-size:15px; color:#fff; text-align:center; padding:20px 0;">신청 데이터가 없습니다.</div>';
+        container.innerHTML = '<div style="font-size:14px; color:#fff; text-align:center; padding:20px 0;">신청 데이터가 없습니다.</div>';
         return;
       }
 
@@ -748,6 +755,7 @@
         card.className = 'admin-card';
         card.innerHTML = `
           <div class="admin-card-title">${app.name} (${app.date})</div>
+          <div class="admin-card-info">계정: ${app.email || '-'}</div>
           <div class="admin-card-info">시간: ${Array.isArray(app.times) ? app.times.join(', ') : app.times}</div>
           <div class="admin-card-info">패스: ${Array.isArray(app.passes) ? app.passes.join(', ') : app.passes}</div>
           <div class="admin-card-info">사유: ${app.reason}</div>
@@ -761,9 +769,26 @@
       });
     }
 
-    // 선생님 승인/거절 상태 변경 (Firebase 반영)
     function changeStatus(id, newStatus) {
       database.ref('passes/' + id + '/status').set(newStatus);
+    }
+
+    function clearAllData() {
+      if (confirm('정말로 모든 신청 데이터를 삭제하시겠습니까?')) {
+        database.ref('passes').remove();
+      }
+    }
+
+    function requestNotificationPermission() {
+      if ("Notification" in window && Notification.permission !== "granted") {
+        Notification.requestPermission();
+      }
+    }
+
+    function sendBrowserNotification(title, body) {
+      if ("Notification" in window && Notification.permission === "granted") {
+        new Notification(title, { body });
+      }
     }
   </script>
 </body>
