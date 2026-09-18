@@ -51,7 +51,7 @@
 
     .kiosk-container {
       width: 92vw;
-      max-width: 650px;
+      max-width: 680px;
       background: #0a0a0a;
       border: 3px solid #fff;
       padding: 16px;
@@ -312,7 +312,7 @@
       margin-top: 10px;
     }
 
-    /* 선생님 화면 추가 스타일 */
+    /* 선생님 화면 스타일 */
     .teacher-top-bar {
       width: 100%;
       display: flex;
@@ -432,13 +432,14 @@
       border-collapse: collapse;
       font-size: 12px;
       text-align: left;
-      min-width: 450px;
+      min-width: 520px;
     }
 
     .approved-table th, .approved-table td {
       border: 1px solid #444;
       padding: 6px 8px;
       color: #fff;
+      vertical-align: middle;
     }
 
     .approved-table th {
@@ -588,6 +589,7 @@
                     <th>시간</th>
                     <th>패스 기기</th>
                     <th>사유</th>
+                    <th style="width: 70px; text-align: center;">복사</th>
                   </tr>
                 </thead>
                 <tbody id="approvedTableBody">
@@ -962,7 +964,7 @@
       // --- B. 승인 완료 (표) 렌더링 ---
       approvedTableBody.innerHTML = '';
       if (approvedApps.length === 0) {
-        approvedTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#777; padding:12px;">승인 완료된 학생이 없습니다.</td></tr>';
+        approvedTableBody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#777; padding:12px;">승인 완료된 학생이 없습니다.</td></tr>';
       } else {
         approvedApps.reverse().forEach(app => {
           const timeStr = Array.isArray(app.times) ? app.times.join(', ') : app.times;
@@ -975,6 +977,9 @@
             <td>${timeStr}</td>
             <td>${passStr}</td>
             <td>${app.reason}</td>
+            <td style="text-align:center;">
+              <button class="btn-admin-act btn-copy" onclick="copyPassInfo('${timeStr}', '${passStr}', '${app.reason}')">📋 복사</button>
+            </td>
           `;
           approvedTableBody.appendChild(row);
         });
