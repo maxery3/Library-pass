@@ -8,7 +8,7 @@
   <!-- 8비트 아케이드 픽셀 폰트 로드 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/neodunggeunmo/neodunggeunmo@v1.5.0/neodunggeunmo.css">
   
-  <!-- Firebase 라이브러리 -->
+  <!-- Firebase 실시간 데이터베이스 라이브러리 -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -50,8 +50,8 @@
     }
 
     .kiosk-container {
-      width: 95vw;
-      max-width: 540px;
+      width: 92vw;
+      max-width: 650px;
       background: #0a0a0a;
       border: 3px solid #fff;
       padding: 16px;
@@ -80,7 +80,7 @@
     .screen-border {
       border: 2px solid #fff;
       padding: 20px 14px;
-      min-height: 460px;
+      min-height: 440px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -112,14 +112,14 @@
     .main-title {
       font-size: 34px;
       letter-spacing: 5px;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       text-align: center;
     }
     .main-sub {
       font-size: 12px;
       letter-spacing: 4px;
       color: #888;
-      margin-bottom: 30px;
+      margin-bottom: 50px;
       text-align: center;
     }
 
@@ -137,22 +137,10 @@
       box-shadow: 2px 2px 0px #888, 4px 4px 0px #000;
     }
 
-    .user-info-bar {
-      font-size: 11px;
-      color: #aaa;
-      margin-bottom: 12px;
-      border-bottom: 1px dashed #444;
-      padding-bottom: 6px;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
     .form-title {
       font-size: 22px;
       letter-spacing: 4px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       text-align: center;
     }
     .form-group {
@@ -235,130 +223,18 @@
       font-size: 14px;
       letter-spacing: 2px;
       color: #888;
-      margin-bottom: 30px;
+      margin-bottom: 36px;
     }
-
-    /* 선생님 화면 추가 스타일 */
-    .teacher-controls {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 12px;
-      border-bottom: 1px solid #333;
-      padding-bottom: 10px;
-    }
-    
-    .teacher-tabs {
-      display: flex;
-      gap: 6px;
-      width: 100%;
-    }
-    .teacher-tab-btn {
-      flex: 1;
-      background: #111;
-      border: 1px solid #777;
-      color: #aaa;
-      padding: 6px 0;
-      font-size: 12px;
+    .link-home {
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 13px;
+      text-decoration: underline;
+      margin-top: 16px;
       cursor: pointer;
-      text-align: center;
-    }
-    .teacher-tab-btn.active {
-      background: #fff;
-      color: #000;
-      border-color: #fff;
-      font-weight: bold;
     }
 
-    .teacher-action-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .btn-action {
-      background: #000;
-      border: 1px solid #fff;
-      color: #fff;
-      padding: 5px 8px;
-      font-size: 11px;
-      cursor: pointer;
-      box-shadow: 2px 2px 0px #fff;
-      white-space: nowrap;
-    }
-    .btn-action:hover { background: #fff; color: #000; }
-    .btn-action-green { border-color: #00ff66; color: #00ff66; box-shadow: 2px 2px 0px #00ff66; }
-    .btn-action-green:hover { background: #00ff66; color: #000; }
-
-    /* 카드 상태별 테두리 및 배지 */
-    .admin-card {
-      width: 100%;
-      border: 2px solid #555;
-      padding: 10px;
-      margin-bottom: 10px;
-      background: #000;
-      color: #fff;
-      position: relative;
-    }
-    .admin-card.status-pending { border-color: #ffcc00; }
-    .admin-card.status-approved { border-color: #00ff66; }
-    .admin-card.status-rejected { border-color: #ff4444; }
-
-    .admin-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 6px;
-    }
-    .admin-card-title {
-      font-size: 15px;
-      font-weight: bold;
-    }
-
-    .status-badge {
-      font-size: 10px;
-      padding: 2px 6px;
-      border: 1px solid #fff;
-    }
-    .status-badge.pending { background: #ffcc00; color: #000; border-color: #ffcc00; }
-    .status-badge.approved { background: #00ff66; color: #000; border-color: #00ff66; }
-    .status-badge.rejected { background: #ff4444; color: #fff; border-color: #ff4444; }
-
-    .admin-card-info {
-      font-size: 12px;
-      color: #ddd;
-      margin: 3px 0;
-      line-height: 1.3;
-    }
-    .admin-actions {
-      display: flex;
-      gap: 6px;
-      margin-top: 8px;
-      flex-wrap: wrap;
-    }
-    
-    /* 표(테이블) 스타일 */
-    .pixel-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 11px;
-      color: #fff;
-      margin-top: 4px;
-    }
-    .pixel-table th, .pixel-table td {
-      border: 1px solid #fff;
-      padding: 6px 4px;
-      text-align: center;
-      word-break: break-all;
-    }
-    .pixel-table th {
-      background: #222;
-      color: #00ff66;
-    }
-
-    /* 영수증 출력 관련 */
     .print-slot-area {
       margin-top: 14px;
       width: 100%;
@@ -367,6 +243,7 @@
       align-items: center;
       position: relative;
     }
+
     .print-slot-bar {
       width: 85%;
       height: 8px;
@@ -375,6 +252,7 @@
       position: relative;
       z-index: 10;
     }
+
     .receipt-dispenser-wrapper {
       width: 75%;
       overflow: hidden;
@@ -384,7 +262,9 @@
       position: relative;
       z-index: 5;
     }
-    .receipt-dispenser-wrapper.slide-down { max-height: 230px; }
+    .receipt-dispenser-wrapper.slide-down {
+      max-height: 230px;
+    }
 
     .paper-out {
       background: #fff;
@@ -402,11 +282,174 @@
       text-align: left;
     }
 
+    .receipt-dispenser-wrapper.slide-down .paper-out {
+      animation: paperPrint 2.2s ease-out forwards;
+    }
+
+    @keyframes paperPrint {
+      0% { transform: translateY(0); }
+      15% { transform: translateY(-1px); }
+      30% { transform: translateY(1px); }
+      45% { transform: translateY(-1px); }
+      60% { transform: translateY(1px); }
+      75% { transform: translateY(-0.5px); }
+      100% { transform: translateY(0); }
+    }
+
     .print-slot-label {
       font-size: 10px;
       letter-spacing: 4px;
       color: #666;
       margin-top: 6px;
+    }
+
+    .teacher-toggle-btn {
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    /* 선생님 화면 추가 스타일 */
+    .teacher-top-bar {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 14px;
+      border-bottom: 2px dashed #fff;
+      padding-bottom: 12px;
+    }
+
+    .teacher-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .teacher-controls select {
+      width: auto;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .btn-action-sm {
+      background: #000;
+      border: 2px solid #fff;
+      color: #fff;
+      padding: 6px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0px #fff;
+      white-space: nowrap;
+    }
+    .btn-action-sm:hover {
+      background: #fff;
+      color: #000;
+    }
+    .btn-approve-all {
+      border-color: #55ff55;
+      color: #55ff55;
+      box-shadow: 2px 2px 0px #55ff55;
+    }
+    .btn-approve-all:hover {
+      background: #55ff55;
+      color: #000;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #fff;
+      margin: 14px 0 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .admin-card {
+      width: 100%;
+      border: 2px solid #fff;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      background: #000;
+      color: #fff;
+    }
+    .admin-card-title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .admin-card-info {
+      font-size: 13px;
+      color: #ccc;
+      margin: 3px 0;
+      line-height: 1.4;
+    }
+    .admin-actions {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-admin-act {
+      background: #000;
+      border: 1px solid #fff;
+      color: #fff;
+      padding: 3px 8px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .btn-admin-act:hover {
+      background: #fff;
+      color: #000;
+    }
+    .btn-copy {
+      border-color: #ffd700;
+      color: #ffd700;
+    }
+    .btn-copy:hover {
+      background: #ffd700;
+      color: #000;
+    }
+
+    /* 승인 완료 학생 표 스타일 */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 16px;
+      border: 2px solid #fff;
+    }
+
+    .approved-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      text-align: left;
+      min-width: 450px;
+    }
+
+    .approved-table th, .approved-table td {
+      border: 1px solid #444;
+      padding: 6px 8px;
+      color: #fff;
+    }
+
+    .approved-table th {
+      background: #222;
+      color: #fff;
+      border-bottom: 2px solid #fff;
+      font-weight: normal;
+    }
+
+    .approved-table tr:nth-child(even) {
+      background: #0d0d0d;
     }
 
     .modal-overlay {
@@ -455,25 +498,15 @@
 
       <div class="screen-border">
 
-        <!-- [화면 1] 이메일 입력 식별 화면 -->
+        <!-- [화면 1] 메인 화면 -->
         <div class="screen active" id="screenStart">
           <div class="main-title arcade-text">도서관 패스</div>
           <div class="main-sub">LIBRARY PASS</div>
-          
-          <div class="form-group" style="width: 85%; margin-bottom: 20px;">
-            <label class="form-label" style="text-align: center; margin-bottom: 8px;">이메일을 입력하세요</label>
-            <input type="text" id="userEmailInput" placeholder="예: mg2026@school.es.kr" onkeypress="if(event.key==='Enter') identifyUser()">
-          </div>
-
-          <button class="pixel-btn" onclick="identifyUser()">입장하기</button>
+          <button class="pixel-btn" onclick="goToScreen('screenForm')">받기</button>
         </div>
 
-        <!-- [화면 2] 학생 패스 신청 화면 -->
+        <!-- [화면 2] 패스 신청 폼 화면 -->
         <div class="screen" id="screenForm">
-          <div class="user-info-bar">
-            <span id="userEmailTag">이메일: -</span>
-            <span style="cursor:pointer; text-decoration:underline;" onclick="resetToStart()">처음으로</span>
-          </div>
           <div class="form-title">패스 신청</div>
 
           <div class="form-group">
@@ -515,72 +548,63 @@
           <button class="btn-submit-wide" onclick="submitPassForm()">작성하기</button>
         </div>
 
-        <!-- [화면 3] 학생 승인 상태 화면 -->
+        <!-- [화면 3] 승인 상태 화면 -->
         <div class="screen" id="screenStatus">
           <div class="status-sub">STATUS</div>
           <div class="status-main-text arcade-text" id="statusText">승인확인 중.</div>
           <div class="code-text" id="codeText">LP-0000</div>
 
-          <button class="pixel-btn" onclick="handleReceiptPrint()" style="margin-bottom:12px;">영수증 출력</button>
-          <button class="pixel-btn" onclick="resetToStart()" style="font-size:13px; padding:6px 16px;">처음으로</button>
+          <button class="pixel-btn" onclick="handleReceiptPrint()">영수증 출력</button>
+          <button class="link-home" onclick="goToScreen('screenStart')">처음으로</button>
         </div>
 
-        <!-- [화면 4] 선생님 관리 화면 -->
+        <!-- [선생님 전용 화면] -->
         <div class="screen" id="screenTeacher">
-          <div class="user-info-bar">
-            <span id="teacherEmailTag">[선생님 모드]</span>
-            <span style="cursor:pointer; text-decoration:underline;" onclick="resetToStart()">로그아웃</span>
-          </div>
-
-          <!-- 선생님 화면 상단 제어 바 -->
-          <div class="teacher-controls">
-            <!-- 탭 전환 (신청 관리 카드 / 승인목록 표) -->
-            <div class="teacher-tabs">
-              <button class="teacher-tab-btn active" id="tabCardBtn" onclick="switchTeacherTab('card')">신청 관리 (카드)</button>
-              <button class="teacher-tab-btn" id="tabTableBtn" onclick="switchTeacherTab('table')">승인 목록 (표)</button>
-            </div>
-
-            <!-- 주차 필터 및 상태 필터 -->
-            <div class="grid-2">
-              <select id="weekFilterSelect" onchange="renderTeacherView()"></select>
-              <select id="statusFilterSelect" onchange="renderTeacherView()">
-                <option value="all">상태: 전체보기</option>
-                <option value="pending">대기중만 보기</option>
-                <option value="approved">승인됨만 보기</option>
-                <option value="rejected">거절됨만 보기</option>
+          <div class="teacher-top-bar">
+            <div style="font-size:16px; letter-spacing:2px;" class="arcade-text">[선생님 승인 관리]</div>
+            
+            <div class="teacher-controls">
+              <select id="teacherWeekSelect" onchange="renderTeacherList()">
+                <!-- 주차 옵션이 동적으로 들어감 -->
               </select>
-            </div>
-
-            <!-- 일괄 승인 / 삭제 버튼 -->
-            <div class="teacher-action-bar">
-              <button class="btn-action btn-action-green" onclick="approveAllPending()">선택 주차 전체승인</button>
-              <button class="btn-action" onclick="clearAllData()">전체데이터 지우기</button>
+              <button class="btn-action-sm btn-approve-all" onclick="approveAllPending()">전체 승인</button>
+              <button class="btn-action-sm" onclick="clearAllData()">전체지우기</button>
             </div>
           </div>
 
-          <!-- 탭 1: 신청 관리 카드 리스트 -->
-          <div id="teacherCardView" style="width:100%; max-height:280px; overflow-y:auto;"></div>
+          <div id="teacherContentArea" style="width:100%; max-height:360px; overflow-y:auto; padding-right:4px;">
+            <!-- 대기 목록 -->
+            <div class="section-title">⌛ [대기 중인 신청 목록]</div>
+            <div id="pendingList"></div>
 
-          <!-- 탭 2: 승인된 학생만 한눈에 보는 표 -->
-          <div id="teacherTableView" style="width:100%; max-height:280px; overflow-y:auto; display:none;">
-            <table class="pixel-table">
-              <thead>
-                <tr>
-                  <th>이름</th>
-                  <th>날짜</th>
-                  <th>시간</th>
-                  <th>기기</th>
-                  <th>사유</th>
-                </tr>
-              </thead>
-              <tbody id="approvedTableBody"></tbody>
-            </table>
+            <!-- 승인 완료 표 -->
+            <div class="section-title">✅ [승인 완료 학생 요약 (표)]</div>
+            <div class="table-container">
+              <table class="approved-table">
+                <thead>
+                  <tr>
+                    <th>이름</th>
+                    <th>날짜</th>
+                    <th>시간</th>
+                    <th>패스 기기</th>
+                    <th>사유</th>
+                  </tr>
+                </thead>
+                <tbody id="approvedTableBody">
+                  <!-- 승인 내역 행 -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 거절 목록 -->
+            <div class="section-title">❌ [거절된 신청 목록]</div>
+            <div id="rejectedList"></div>
           </div>
         </div>
 
       </div>
 
-      <!-- 하단 PRINT 슬롯 (영수증) -->
+      <!-- 하단 PRINT 슬롯 -->
       <div class="print-slot-area">
         <div class="print-slot-bar"></div>
         
@@ -590,11 +614,15 @@
               <div style="text-align: center; font-weight: bold; margin-bottom: 6px; border-bottom: 1px dashed #000; padding-bottom: 4px; font-size: 13px;">
                 LIBRARY PASS
               </div>
-              <div style="font-size: 11px; margin: 6px 0; color: #333;">------------------------</div>
+              <div style="font-size: 11px; margin: 6px 0; color: #333;">
+                ------------------------
+              </div>
               <div id="pMiniName" style="margin-bottom: 4px;">성명: -</div>
               <div id="pMiniDate" style="margin-bottom: 4px;">날짜: -</div>
               <div id="pMiniPass" style="margin-bottom: 4px;">패스: -</div>
-              <div style="font-size: 11px; margin: 6px 0; color: #333;">------------------------</div>
+              <div style="font-size: 11px; margin: 6px 0; color: #333;">
+                ------------------------
+              </div>
             </div>
             <div style="text-align: center; font-size: 10px; color: #666; border-top: 1px solid #000; padding-top: 4px;">
               [클릭하여 확대보기]
@@ -608,7 +636,9 @@
     </div>
   </div>
 
-  <!-- 영수증 모달 -->
+  <button class="teacher-toggle-btn" id="teacherToggleLink" onclick="toggleTeacherMode()">▶ 선생님 화면</button>
+
+  <!-- 영수증 상세 모달 -->
   <div class="modal-overlay" id="receiptModal">
     <div class="receipt-paper">
       <h3>패스 영수증</h3>
@@ -624,6 +654,7 @@
   </div>
 
   <script>
+    // Firebase 연동 설정
     const firebaseConfig = {
       apiKey: "AIzaSyD-2lCTS1sve-aCZYa8766fm1AeB1VX6-Y",
       authDomain: "library-pass-14d45.firebaseapp.com",
@@ -638,84 +669,28 @@
     firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
 
-    let currentEmail = "";
-    let isTeacher = false;
     let currentAppId = null;
-    let passesData = {};
+    let isTeacherView = false;
     let statusTimer = null;
-    let activeTab = 'card'; // 'card' 또는 'table'
+    let passesData = {};
 
     window.onload = () => {
       initDropdowns();
       
-      // Realtime Database 실시간 반응
+      // Firebase 실시간 데이터 동기화
       database.ref('passes').on('value', (snapshot) => {
-        const oldPasses = passesData;
         passesData = snapshot.val() || {};
-
-        if (isTeacher) {
-          const newKeys = Object.keys(passesData).filter(k => !oldPasses[k]);
-          if (newKeys.length > 0 && Object.keys(oldPasses).length > 0) {
-            const latest = passesData[newKeys[0]];
-            const passesStr = Array.isArray(latest.passes) ? latest.passes.join(', ') : latest.passes;
-            sendBrowserNotification(`새 패스 신청: ${latest.name}`, `${latest.date} - ${passesStr}`);
-          }
-          updateWeekDropdownOptions();
-          renderTeacherView();
-        }
-
+        if (isTeacherView) renderTeacherList();
         if (currentAppId) updateStatusDisplay();
       });
     };
-
-    // 오늘 날짜 기준 해당 주차 계산 (예: "2026년 9월 3주차")
-    function getWeekKey(d = new Date()) {
-      const date = new Date(d);
-      date.setHours(0, 0, 0, 0);
-      const day = date.getDay();
-      const diff = date.getDate() - day + (day === 0 ? -6 : 1); // 월요일 시작 기준
-      const monday = new Date(date.setDate(diff));
-      const month = monday.getMonth() + 1;
-      const weekNum = Math.ceil(monday.getDate() / 7);
-      return `${monday.getFullYear()}년 ${month}월 ${weekNum}주차`;
-    }
-
-    function identifyUser() {
-      const emailInput = document.getElementById('userEmailInput').value.trim();
-      if (!emailInput) {
-        alert('이메일을 입력해 주세요.');
-        return;
-      }
-
-      currentEmail = emailInput.toLowerCase();
-
-      if (currentEmail.startsWith('mg')) {
-        isTeacher = false;
-        document.getElementById('userEmailTag').innerText = `계정: ${currentEmail}`;
-        goToScreen('screenForm');
-      } else {
-        isTeacher = true;
-        document.getElementById('teacherEmailTag').innerText = `[선생님] ${currentEmail}`;
-        requestNotificationPermission();
-        updateWeekDropdownOptions();
-        goToScreen('screenTeacher');
-        renderTeacherView();
-      }
-    }
-
-    function resetToStart() {
-      currentEmail = "";
-      isTeacher = false;
-      document.getElementById('userEmailInput').value = "";
-      resetForm();
-      goToScreen('screenStart');
-    }
 
     function initDropdowns() {
       const mSel = document.getElementById('selectMonth');
       const dSel = document.getElementById('selectDay');
       mSel.innerHTML = '<option value="">월</option>';
       dSel.innerHTML = '<option value="">일</option>';
+
       for (let m = 1; m <= 12; m++) mSel.innerHTML += `<option value="${m}">${m}월</option>`;
       for (let d = 1; d <= 31; d++) dSel.innerHTML += `<option value="${d}">${d}일</option>`;
     }
@@ -745,14 +720,19 @@
     }
 
     function goToScreen(screenId) {
+      if (screenId === 'screenStart') {
+        resetForm();
+      }
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById(screenId).classList.add('active');
     }
 
+    // 신청 데이터 Firebase에 등록
     function submitPassForm() {
       const name = document.getElementById('inputName').value.trim();
       const month = document.getElementById('selectMonth').value;
       const day = document.getElementById('selectDay').value;
+
       const times = Array.from(document.querySelectorAll('#timeGroup .selected')).map(el => el.dataset.val);
       const passes = Array.from(document.querySelectorAll('#passGroup .selected')).map(el => el.dataset.val);
       const reason = document.getElementById('inputReason').value.trim();
@@ -762,18 +742,18 @@
       if (times.length === 0) { alert('시간을 선택하세요.'); return; }
       if (passes.length === 0) { alert('패스를 선택하세요.'); return; }
 
+      const codeNum = Math.floor(1000 + Math.random() * 9000);
+      const now = Date.now();
       const newApp = {
-        id: 'APP_' + Date.now(),
-        code: `LP-${Math.floor(1000 + Math.random() * 9000)}`,
-        email: currentEmail,
+        id: 'APP_' + now,
+        createdAt: now,
+        code: `LP-${codeNum}`,
         name,
         date: `${month}월 ${day}일`,
         times,
         passes,
         reason: reason || '사유 없음',
-        status: 'pending',
-        timestamp: Date.now(),
-        weekKey: getWeekKey()
+        status: 'pending'
       };
 
       currentAppId = newApp.id;
@@ -784,6 +764,7 @@
       updateStatusDisplay();
     }
 
+    // 상태 확인 애니메이션 처리
     function updateStatusDisplay() {
       if (!currentAppId || !passesData[currentAppId]) return;
       const app = passesData[currentAppId];
@@ -803,178 +784,11 @@
           clearInterval(statusTimer);
           statusTimer = null;
         }
-        if (app.status === 'approved') statusText.innerText = '승인 완료!';
-        else if (app.status === 'rejected') statusText.innerText = '승인 거절됨';
-      }
-    }
-
-    /* --- 선생님 화면 제어 로직 --- */
-
-    function switchTeacherTab(tab) {
-      activeTab = tab;
-      document.getElementById('tabCardBtn').classList.toggle('active', tab === 'card');
-      document.getElementById('tabTableBtn').classList.toggle('active', tab === 'table');
-      
-      document.getElementById('teacherCardView').style.display = (tab === 'card') ? 'block' : 'none';
-      document.getElementById('teacherTableView').style.display = (tab === 'table') ? 'block' : 'none';
-      
-      renderTeacherView();
-    }
-
-    function updateWeekDropdownOptions() {
-      const select = document.getElementById('weekFilterSelect');
-      const currentSelected = select.value;
-      const weeksSet = new Set();
-      
-      weeksSet.add(getWeekKey()); // 이번주 기본 등록
-
-      Object.values(passesData).forEach(app => {
-        if (app.weekKey) weeksSet.add(app.weekKey);
-      });
-
-      const sortedWeeks = Array.from(weeksSet).sort().reverse();
-      select.innerHTML = '<option value="all">주차: 전체 주차 보기</option>';
-      
-      sortedWeeks.forEach(w => {
-        select.innerHTML += `<option value="${w}">${w}</option>`;
-      });
-
-      if (currentSelected && Array.from(select.options).some(o => o.value === currentSelected)) {
-        select.value = currentSelected;
-      }
-    }
-
-    function getFilteredList() {
-      let list = Object.values(passesData);
-      const selectedWeek = document.getElementById('weekFilterSelect').value;
-      const selectedStatus = document.getElementById('statusFilterSelect').value;
-
-      if (selectedWeek !== 'all') {
-        list = list.filter(app => (app.weekKey || getWeekKey()) === selectedWeek);
-      }
-
-      if (selectedStatus !== 'all') {
-        list = list.filter(app => app.status === selectedStatus);
-      }
-
-      return list.reverse();
-    }
-
-    function renderTeacherView() {
-      if (activeTab === 'card') renderCardList();
-      else renderApprovedTable();
-    }
-
-    // 카드 목록 렌더링
-    function renderCardList() {
-      const list = getFilteredList();
-      const container = document.getElementById('teacherCardView');
-      container.innerHTML = '';
-
-      if (list.length === 0) {
-        container.innerHTML = '<div style="font-size:13px; color:#aaa; text-align:center; padding:30px 0;">조건에 해당하는 신청건이 없습니다.</div>';
-        return;
-      }
-
-      list.forEach(app => {
-        const timesStr = Array.isArray(app.times) ? app.times.join(', ') : app.times;
-        const passesStr = Array.isArray(app.passes) ? app.passes.join(', ') : app.passes;
-        
-        let statusBadgeText = "대기중";
-        if (app.status === 'approved') statusBadgeText = "승인됨";
-        if (app.status === 'rejected') statusBadgeText = "거절됨";
-
-        const card = document.createElement('div');
-        card.className = `admin-card status-${app.status || 'pending'}`;
-        card.innerHTML = `
-          <div class="admin-card-header">
-            <span class="admin-card-title">${app.name} (${app.date})</span>
-            <span class="status-badge ${app.status || 'pending'}">${statusBadgeText}</span>
-          </div>
-          <div class="admin-card-info">주차: ${app.weekKey || '기존'}</div>
-          <div class="admin-card-info">이메일: ${app.email || '-'}</div>
-          <div class="admin-card-info">시간: ${timesStr}</div>
-          <div class="admin-card-info">패스: ${passesStr}</div>
-          <div class="admin-card-info">사유: ${app.reason}</div>
-          <div class="admin-actions">
-            <button class="btn-action btn-action-green" onclick="changeStatus('${app.id}', 'approved')">승인</button>
-            <button class="btn-action" style="border-color:#ff4444; color:#ff4444;" onclick="changeStatus('${app.id}', 'rejected')">거절</button>
-            <button class="btn-action" onclick="copyPassInfo('${app.id}')">📋 정보복사</button>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    // 승인 목록 표 렌더링
-    function renderApprovedTable() {
-      const list = getFilteredList().filter(a => a.status === 'approved');
-      const tbody = document.getElementById('approvedTableBody');
-      tbody.innerHTML = '';
-
-      if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" style="padding:20px; color:#888;">승인된 신청 내역이 없습니다.</td></tr>';
-        return;
-      }
-
-      list.forEach(app => {
-        const timesStr = Array.isArray(app.times) ? app.times.join(', ') : app.times;
-        const passesStr = Array.isArray(app.passes) ? app.passes.join(', ') : app.passes;
-
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td style="font-weight:bold;">${app.name}</td>
-          <td>${app.date}</td>
-          <td>${timesStr}</td>
-          <td>${passesStr}</td>
-          <td style="text-align:left; padding-left:6px;">${app.reason}</td>
-        `;
-        tbody.appendChild(row);
-      });
-    }
-
-    // 개별 상태 변경
-    function changeStatus(id, newStatus) {
-      database.ref('passes/' + id + '/status').set(newStatus);
-    }
-
-    // 선택된 주차 대기중 전체 승인
-    function approveAllPending() {
-      const list = getFilteredList().filter(a => a.status === 'pending');
-      if (list.length === 0) {
-        alert('승인할 대기중 항목이 없습니다.');
-        return;
-      }
-
-      if (confirm(`현재 조건의 대기중 신청 ${list.length}건을 모두 승인하시겠습니까?`)) {
-        const updates = {};
-        list.forEach(app => {
-          updates['passes/' + app.id + '/status'] = 'approved';
-        });
-        database.ref().update(updates);
-      }
-    }
-
-    // [복사 버튼] 시간, 패스 기기, 사유만 텍스트 복사
-    function copyPassInfo(id) {
-      const app = passesData[id];
-      if (!app) return;
-
-      const timesStr = Array.isArray(app.times) ? app.times.join(', ') : app.times;
-      const passesStr = Array.isArray(app.passes) ? app.passes.join(', ') : app.passes;
-      
-      const copyText = `시간: ${timesStr} / 기기: ${passesStr} / 사유: ${app.reason}`;
-
-      navigator.clipboard.writeText(copyText).then(() => {
-        alert(`복사되었습니다!\n\n${copyText}`);
-      }).catch(err => {
-        alert('복사 실패: ' + err);
-      });
-    }
-
-    function clearAllData() {
-      if (confirm('정말로 모든 신청 데이터를 삭제하시겠습니까?')) {
-        database.ref('passes').remove();
+        if (app.status === 'approved') {
+          statusText.innerText = '승인 완료';
+        } else if (app.status === 'rejected') {
+          statusText.innerText = '승인 거절됨';
+        }
       }
     }
 
@@ -991,7 +805,8 @@
       document.getElementById('pMiniDate').innerText = `날짜: ${app.date}`;
       document.getElementById('pMiniPass').innerText = `패스: ${Array.isArray(app.passes) ? app.passes.join(', ') : app.passes}`;
 
-      document.getElementById('dispenserWrapper').classList.add('slide-down');
+      const wrapper = document.getElementById('dispenserWrapper');
+      wrapper.classList.add('slide-down');
     }
 
     function openReceiptModal() {
@@ -1010,16 +825,209 @@
       document.getElementById('receiptModal').classList.remove('active');
     }
 
-    function requestNotificationPermission() {
-      if ("Notification" in window && Notification.permission !== "granted") {
-        Notification.requestPermission();
+    function toggleTeacherMode() {
+      if (!isTeacherView) {
+        const pw = prompt('선생님 비밀번호를 입력하세요:');
+        if (pw === 'inhaklove') {
+          isTeacherView = true;
+          document.getElementById('teacherToggleLink').innerText = '◀ 학생 화면으로';
+          goToScreen('screenTeacher');
+          renderTeacherList();
+        } else if (pw !== null) {
+          alert('비밀번호가 올바르지 않습니다.');
+        }
+      } else {
+        isTeacherView = false;
+        document.getElementById('teacherToggleLink').innerText = '▶ 선생님 화면';
+        goToScreen('screenStart');
       }
     }
 
-    function sendBrowserNotification(title, body) {
-      if ("Notification" in window && Notification.permission === "granted") {
-        new Notification(title, { body });
+    // 선생님 데이터 전체 지우기 (Firebase 연동)
+    function clearAllData() {
+      if (confirm('정말로 모든 신청 데이터를 삭제하시겠습니까?')) {
+        database.ref('passes').remove();
       }
+    }
+
+    // --- 주차(토요일 마감) 계산 헬퍼 함수 ---
+    function getSaturdayKey(timestamp) {
+      const ts = timestamp || Date.now();
+      const date = new Date(ts);
+      const day = date.getDay(); // 0: 일요일, 6: 토요일
+      
+      // 토요일 마감 기준으로 이번주 토요일 날짜 구하기
+      const diffToSat = (6 - day + 7) % 7;
+      const saturday = new Date(date);
+      saturday.setDate(date.getDate() + diffToSat);
+
+      const year = saturday.getFullYear();
+      const month = String(saturday.getMonth() + 1).padStart(2, '0');
+      const dayStr = String(saturday.getDate()).padStart(2, '0');
+      
+      return `${year}-${month}-${dayStr}`;
+    }
+
+    function formatWeekLabel(satKey) {
+      const parts = satKey.split('-');
+      return `📅 ~ ${parts[1]}월 ${parts[2]}일(토) 마감 주차`;
+    }
+
+    // 복사 기능 (시간, 패스, 사유만 클립보드 복사)
+    function copyPassInfo(timeStr, passStr, reasonStr) {
+      const textToCopy = `[시간]: ${timeStr}\n[패스]: ${passStr}\n[사유]: ${reasonStr}`;
+      
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          alert('시간, 패스, 사유가 복사되었습니다!');
+        }).catch(() => fallbackCopy(textToCopy));
+      } else {
+        fallbackCopy(textToCopy);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+      alert('시간, 패스, 사유가 복사되었습니다!');
+    }
+
+    // 선생님 화면 렌더링
+    function renderTeacherList() {
+      const list = Object.values(passesData);
+      const weekSelect = document.getElementById('teacherWeekSelect');
+      const pendingContainer = document.getElementById('pendingList');
+      const approvedTableBody = document.getElementById('approvedTableBody');
+      const rejectedContainer = document.getElementById('rejectedList');
+
+      // 1. 주차(Week Key) 목록 추출 및 드롭다운 업데이트
+      const currentSatKey = getSaturdayKey(Date.now());
+      const weekKeysSet = new Set([currentSatKey]);
+
+      list.forEach(app => {
+        const appTime = app.createdAt || Number((app.id || '').replace('APP_', '')) || Date.now();
+        weekKeysSet.add(getSaturdayKey(appTime));
+      });
+
+      const sortedWeeks = Array.from(weekKeysSet).sort().reverse();
+      const selectedWeek = weekSelect.value || currentSatKey;
+
+      weekSelect.innerHTML = sortedWeeks.map(wKey => 
+        `<option value="${wKey}" ${wKey === selectedWeek ? 'selected' : ''}>${formatWeekLabel(wKey)}</option>`
+      ).join('');
+
+      const activeWeekKey = weekSelect.value;
+
+      // 2. 현재 선택된 주차 데이터 필터링
+      const weekList = list.filter(app => {
+        const appTime = app.createdAt || Number((app.id || '').replace('APP_', '')) || Date.now();
+        return getSaturdayKey(appTime) === activeWeekKey;
+      });
+
+      // 3. 상태별 분류 (Pending, Approved, Rejected)
+      const pendingApps = weekList.filter(app => app.status === 'pending');
+      const approvedApps = weekList.filter(app => app.status === 'approved');
+      const rejectedApps = weekList.filter(app => app.status === 'rejected');
+
+      // --- A. 대기 목록 렌더링 ---
+      pendingContainer.innerHTML = '';
+      if (pendingApps.length === 0) {
+        pendingContainer.innerHTML = '<div style="font-size:12px; color:#777; padding:8px 0;">대기 중인 신청이 없습니다.</div>';
+      } else {
+        pendingApps.reverse().forEach(app => {
+          const timeStr = Array.isArray(app.times) ? app.times.join(', ') : app.times;
+          const passStr = Array.isArray(app.passes) ? app.passes.join(', ') : app.passes;
+          
+          const card = document.createElement('div');
+          card.className = 'admin-card';
+          card.innerHTML = `
+            <div class="admin-card-title">${app.name} (${app.date})</div>
+            <div class="admin-card-info">시간: ${timeStr}</div>
+            <div class="admin-card-info">패스: ${passStr}</div>
+            <div class="admin-card-info">사유: ${app.reason}</div>
+            <div class="admin-actions">
+              <button class="btn-admin-act" onclick="changeStatus('${app.id}', 'approved')">승인</button>
+              <button class="btn-admin-act" onclick="changeStatus('${app.id}', 'rejected')">거절</button>
+              <button class="btn-admin-act btn-copy" onclick="copyPassInfo('${timeStr}', '${passStr}', '${app.reason}')">📋 복사</button>
+            </div>
+          `;
+          pendingContainer.appendChild(card);
+        });
+      }
+
+      // --- B. 승인 완료 (표) 렌더링 ---
+      approvedTableBody.innerHTML = '';
+      if (approvedApps.length === 0) {
+        approvedTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#777; padding:12px;">승인 완료된 학생이 없습니다.</td></tr>';
+      } else {
+        approvedApps.reverse().forEach(app => {
+          const timeStr = Array.isArray(app.times) ? app.times.join(', ') : app.times;
+          const passStr = Array.isArray(app.passes) ? app.passes.join(', ') : app.passes;
+          
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td><strong>${app.name}</strong></td>
+            <td>${app.date}</td>
+            <td>${timeStr}</td>
+            <td>${passStr}</td>
+            <td>${app.reason}</td>
+          `;
+          approvedTableBody.appendChild(row);
+        });
+      }
+
+      // --- C. 거절 목록 렌더링 ---
+      rejectedContainer.innerHTML = '';
+      if (rejectedApps.length === 0) {
+        rejectedContainer.innerHTML = '<div style="font-size:12px; color:#777; padding:8px 0;">거절된 신청이 없습니다.</div>';
+      } else {
+        rejectedApps.reverse().forEach(app => {
+          const card = document.createElement('div');
+          card.className = 'admin-card';
+          card.style.borderColor = '#666';
+          card.innerHTML = `
+            <div class="admin-card-title" style="color:#aaa;">${app.name} (${app.date})</div>
+            <div class="admin-card-info">사유: ${app.reason}</div>
+            <div class="admin-actions">
+              <button class="btn-admin-act" onclick="changeStatus('${app.id}', 'approved')">승인으로 변경</button>
+            </div>
+          `;
+          rejectedContainer.appendChild(card);
+        });
+      }
+    }
+
+    // 선택된 주차 전체 승인
+    function approveAllPending() {
+      const activeWeekKey = document.getElementById('teacherWeekSelect').value;
+      const list = Object.values(passesData);
+      
+      const pendingInWeek = list.filter(app => {
+        const appTime = app.createdAt || Number((app.id || '').replace('APP_', '')) || Date.now();
+        return getSaturdayKey(appTime) === activeWeekKey && app.status === 'pending';
+      });
+
+      if (pendingInWeek.length === 0) {
+        alert('승인할 대기 항목이 없습니다.');
+        return;
+      }
+
+      if (confirm(`현재 주차의 대기 항목 (${pendingInWeek.length}건)을 모두 승인하시겠습니까?`)) {
+        const updates = {};
+        pendingInWeek.forEach(app => {
+          updates['passes/' + app.id + '/status'] = 'approved';
+        });
+        database.ref().update(updates);
+      }
+    }
+
+    // 선생님 승인/거절 상태 변경 (Firebase 반영)
+    function changeStatus(id, newStatus) {
+      database.ref('passes/' + id + '/status').set(newStatus);
     }
   </script>
 </body>
